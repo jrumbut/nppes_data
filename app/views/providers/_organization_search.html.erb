@@ -1,0 +1,31 @@
+<div class="container" id='organization_search' style="display:false;">
+  <%= form_tag(results_providers_path, :method => 'post', :class => 'organization_search' ) do %>
+    <%= hidden_field_tag :search, :true %>
+    <div class="row">
+      <h2>Organization Search</h2>
+      <div class="span3">
+        <%= label_tag :organization, 'Organization Name' %>
+        <%= text_field_tag :organization, params[:organization] || '', :class => 'search-field' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span3">
+        <%= label_tag :city %>
+        <%= text_field_tag :city, params[:city] || '', :class => 'search-field' %>
+      </div>
+      <div class="span3">
+        <%= label_tag :state %>
+        <%= text_field_tag :state, params[:state] || '', :class => 'search-field' %>
+      </div>
+      <div class="span3">
+        <%= label_tag :postal_code %>
+        <%= text_field_tag :postal_code, params[:postal_code] || '', :class => 'search-field' %>
+      </div>
+    </div>
+
+    <div>
+      <%= submit_tag "Search", :class => 'btn primary', :name => nil %>
+    </div>
+  </div>
+  <% end %>
+</div>

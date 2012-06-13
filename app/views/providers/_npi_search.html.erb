@@ -1,0 +1,16 @@
+<div class="container" id='phone_search'>
+  <%= form_tag(results_providers_path, :method => 'post' ) do %>
+    <%= hidden_field_tag :search, :true %>
+    <div class="row">
+      <h2>NPI Search</h2>
+      <div class="span3">
+        <%= label_tag :npi, 'NPI' %>
+        <%= text_field_tag :npi, params[:npi] || '', :class => 'search-field' %>
+      </div>
+    </div>
+    <div>
+      <%= submit_tag "Search", :class => 'btn primary', :name => nil %>
+    </div>
+  </div>
+  <% end %>
+</div>

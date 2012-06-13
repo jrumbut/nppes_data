@@ -1,0 +1,85 @@
+<p id="notice"><%= notice %></p>
+
+<fieldset>
+  <legend>Provider Information</legend>
+  <p>
+    <b>Name:</b>
+    <%= @provider.name %>
+  </p>
+  <p>
+    <b>Gender:</b>
+    <%= @provider.provider_gender_code %>
+  </p>
+  <p>
+    <b>Sole Proprieter?:</b>
+    <%= @provider.is_sole_proprietor %>
+  </p>
+</fieldset>
+<fieldset>
+  <legend>NPI Information</legend>
+  <p>
+    <b>NPI:</b>
+    <%= @provider.npi %>
+  </p>
+  <p>
+    <b>Entity Type:</b>
+    <%= @provider.entity_type_code %>
+  </p>
+  <p>
+    <b>Enumeration Date:</b>
+    <%= @provider.provider_enumeration_date %>
+  </p>
+  <p>
+    <b>Last Update Date:</b>
+    <%= @provider.last_update_date %>
+  </p>
+  <p>
+    <b>Replacement NPI:</b>
+    <%= @provider.replacement_npi %>
+  </p>
+  <p>
+    <b>Deactivation Date:</b>
+    <%= @provider.npi_deactivation_date %>
+  </p>
+  <p>
+    <b>Reactivation Date:</b>
+    <%= @provider.npi_reactivation_date %>
+  </p>
+</fieldset>
+<fieldset>
+  <legend>Provider Business Mailing Address</legend>
+  <p>
+    <b>Address:</b>
+    <div><%= @provider.provider_first_line_business_address %><br/>
+    <%= @provider.provider_business_mailing_address_city_name %>, <%= @provider.provider_mailing_address_state_name %>  <%= @provider.provider_business_mailing_address_postal_code %></div>
+  </p>
+  <p>
+    <b>Phone Number:</b>
+    <%= @provider.provider_business_mailing_address_telephone_number %>
+  </p>
+  <p>
+    <b>Fax Number:</b>
+    <%= @provider.provider_business_mailing_address_fax_number %>
+  </p>
+</fieldset>
+<fieldset>
+  <legend>Provider Business Mailing Address</legend>
+
+  <table class="table">
+    <thead>
+      <th>Primary Taxonomy</th>
+      <th>Selected Taxonomy</th>
+    </thead>
+    <tbody>
+      <% @provider.provider_taxonomies.each do |tax| %>
+        <tr>
+          <td><%= tax.primary %></td>
+          <td><%= tax.taxonomy %></td>
+        </tr>
+      <% end -%>
+    </tbody>
+  </table>
+</fieldset>
+
+
+<%= link_to 'Back', providers_path %>
