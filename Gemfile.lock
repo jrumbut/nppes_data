@@ -50,6 +50,7 @@ GEM
       multi_json (~> 1.0)
     highline (1.6.12)
     hike (1.2.1)
+    hippo (0.2.2)
     i18n (0.6.0)
     journey (1.0.3)
     jquery-rails (2.0.2)
@@ -135,6 +136,7 @@ DEPENDENCIES
   bootstrap-sass (~> 2.0.3)
   capistrano
   coffee-rails (~> 3.2.1)
+  hippo
   jquery-rails
   kaminari
   mysql2

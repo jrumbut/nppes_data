@@ -11,15 +11,15 @@
     <div class="row">
       <div class="span3">
         <%= label_tag :city %>
-        <%= text_field_tag :city, params[:city] || '', :class => 'search-field' %>
+        <%= text_field_tag :org_city, params[:city] || '', :class => 'search-field' %>
       </div>
       <div class="span3">
         <%= label_tag :state %>
-        <%= text_field_tag :state, params[:state] || '', :class => 'search-field' %>
+        <%= text_field_tag :org_state, params[:state] || '', :class => 'search-field' %>
       </div>
       <div class="span3">
         <%= label_tag :postal_code %>
-        <%= text_field_tag :postal_code, params[:postal_code] || '', :class => 'search-field' %>
+        <%= text_field_tag :org_postal_code, params[:org_postal_code] || '', :class => 'search-field' %>
       </div>
     </div>
 

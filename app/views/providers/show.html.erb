@@ -69,12 +69,14 @@
     <thead>
       <th>Primary Taxonomy</th>
       <th>Selected Taxonomy</th>
+      <th>Description</th>
     </thead>
     <tbody>
       <% @provider.provider_taxonomies.each do |tax| %>
         <tr>
-          <td><%= tax.primary %></td>
-          <td><%= tax.taxonomy %></td>
+          <td class="span3"><%= tax.primary %></td>
+          <td class="span3"><%= tax.taxonomy %></td>
+          <td class="span6"><b><%= tax.description[:classification] %></b> - <%= tax.description[:definition] %></td>
         </tr>
       <% end -%>
     </tbody>
