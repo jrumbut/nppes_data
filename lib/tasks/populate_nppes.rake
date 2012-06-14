@@ -1,5 +1,6 @@
 require 'csv'
 
+desc "Populate NPPES from file."
 task :populate_nppes, [:file] => :environment do |t,args|
   parse_file(args.file)
 end
@@ -15,7 +16,7 @@ def parse_file(file)
 end
 
 def process_row(row)
-  provider = Provider.new
+  provider = Provider.where(:npi => row[:npi]).first_or_initialize
 
   provider.npi                                                            = row[:npi]
   provider.entity_type_code                                               = row[:entity_type_code]
@@ -76,30 +77,29 @@ def process_row(row)
   1.upto(15).each do |num|
     next unless row[:"provider_license_number_#{num}"].length > 0
 
-    provider_identifier                 = provider.provider_identifiers.new
-    provider_identifier.identifier      = row[:"provider_license_number_#{num}"]
-    provider_identifier.type_code       = 'LC'
-    provider_identifier.state           = row[:":provider_license_number_state_code_#{num}"]
-
-    provider_identifier.save
+    provider.provider_identifiers.where(
+      identifier: row[:"provider_license_number_#{num}"],
+      type_code:  'LC',
+      state:      row[:":provider_license_number_state_code_#{num}"]).first_or_create
   end
 
   1.upto(15).each do |num|
     next unless row[:"healthcare_provider_taxonomy_code_#{num}"].length > 0
 
-    provider_taxonomy             = provider.provider_taxonomies.new
-    provider_taxonomy.taxonomy    = row[:"healthcare_provider_taxonomy_code_#{num}"]
-    provider_taxonomy.primary     = row[:"healthcare_provider_primary_taxonomy_switch_#{num}"] == 'Y' ? true : false
-    provider_taxonomy.save
+    primary  = row[:"healthcare_provider_primary_taxonomy_switch_#{num}"] == 'Y' ? true : false
+
+    provider.provider_taxonomies.where(
+      taxonomy: row[:"healthcare_provider_taxonomy_code_#{num}"]
+      primary:  primary).first_or_create
   end
 
   1.upto(50).each do |num|
     next unless row[:"other_provider_identifier_#{num}"].length > 0
 
-    provider_identifier                 = provider.provider_identifiers.new
-    provider_identifier.identifier      = row[:"other_provider_identifier_#{num}"]
-    provider_identifier.type_code       = row[:":other_provider_identifier_type_code_#{num}"]
-    provider_identifier.state           = row[:":other_provider_identifier_state_#{num}"]
-    provider_identifier.additional_info = row[:":other_provider_identifier_issuer_#{num}"]
+    provider.provider_identifiers.where(
+      identifier:       row[:"other_provider_identifier_#{num}"],
+      type_code:        row[:":other_provider_identifier_type_code_#{num}"],
+      state:            row[:":other_provider_identifier_state_#{num}"],
+      additional_info:  row[:":other_provider_identifier_issuer_#{num}"]).first_or_create
   end
 end
