@@ -89,7 +89,7 @@ def process_row(row)
     primary  = row[:"healthcare_provider_primary_taxonomy_switch_#{num}"] == 'Y' ? true : false
 
     provider.provider_taxonomies.where(
-      taxonomy: row[:"healthcare_provider_taxonomy_code_#{num}"]
+      taxonomy: row[:"healthcare_provider_taxonomy_code_#{num}"],
       primary:  primary).first_or_create
   end
 
