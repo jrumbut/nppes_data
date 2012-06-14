@@ -8,6 +8,16 @@
 </head>
   <body>
   <%= render 'layouts/topnav' %>
+  <div class="flash-container">
+      <% if flash[:notice] %>
+        <div class="alert info flash-body"><%= flash[:notice] %></div>
+      <% end %>
+      <% if flash[:alert] %>
+        <div class="alert error flash-body"><%= flash[:alert] %></div>
+      <% end %>
+    <script type="text/javascript">setTimeout("$('.flash-container').fadeOut('fast')", 2500);</script>
+  </div>
+
   <%= yield %>
   </body>
 </html>

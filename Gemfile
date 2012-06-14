@@ -7,6 +7,7 @@ gem 'bootstrap-sass', '~> 2.0.3'
 gem 'kaminari'
 gem 'jquery-rails'
 gem 'mechanize'
+gem 'hippo'
 
 group :development, :test do
   gem 'capistrano'

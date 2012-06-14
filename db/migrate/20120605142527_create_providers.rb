@@ -2,8 +2,8 @@ class CreateProviders < ActiveRecord::Migration
   def change
     create_table :providers do |t|
       t.integer  :npi
-      t.integer  :entity_type_code
-      t.integer  :replacement_npi
+      t.string   :entity_type_code
+      t.string   :replacement_npi
       t.string   :employer_identification_number,                                limit: 9
       t.string   :provider_organization_name,                                    limit: 70
       t.string   :provider_last_name,                                            limit: 35
@@ -20,7 +20,7 @@ class CreateProviders < ActiveRecord::Migration
       t.string   :provider_other_name_prefix_text,                               limit: 5
       t.string   :provider_other_name_suffix_text,                               limit: 5
       t.string   :provider_other_credential_text,                                limit: 20
-      t.integer  :provider_other_last_name_type_code,                            limit: 1
+      t.string  :provider_other_last_name_type_code,                            limit: 1
       t.string   :provider_first_line_business_address,                          limit: 55
       t.string   :provider_first_line_business_address,                          limit: 55
       t.string   :provider_business_mailing_address_city_name,                   limit: 40
@@ -37,11 +37,11 @@ class CreateProviders < ActiveRecord::Migration
       t.string   :provider_business_practice_location_address_country_code,      limit: 2
       t.string   :provider_business_practice_location_address_telephone_number,  limit: 20
       t.string   :provider_business_practice_location_address_fax_number,        limit: 20
-      t.datetime :provider_enumeration_date
-      t.datetime :last_update_date
+      t.string   :provider_enumeration_date
+      t.string   :last_update_date
       t.string   :npi_deactivation_reason_code,                                  limit: 2
-      t.datetime :npi_deactivation_date
-      t.datetime :npi_reactivation_date
+      t.string   :npi_deactivation_date
+      t.string   :npi_reactivation_date
       t.string   :provider_gender_code,                                          limit: 1
       t.string   :authorized_official_last_name,                                 limit: 35
       t.string   :authorized_official_first_name,                                limit: 20
