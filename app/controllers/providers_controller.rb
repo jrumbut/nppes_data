@@ -6,7 +6,7 @@ class ProvidersController < ApplicationController
   end
 
   def show
-    @provider = Provider.find(params[:id])
+    @provider = Provider.where('id = ? OR npi = ?',params[:id], params[:npi]).limit(1).first
   end
 
   def index
