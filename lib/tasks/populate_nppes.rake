@@ -2,7 +2,11 @@ require 'csv'
 
 desc "Populate NPPES from file."
 task :populate_nppes, [:file] => :environment do |t,args|
-  parse_file(args.file)
+  begin
+    parse_file(args.file)
+  rescue => ex
+    $stderr.puts [ex.message, *ex.backtrace]
+  end
 end
 
 def parse_file(file)
