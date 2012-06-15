@@ -1,5 +1,5 @@
 <h1>Listing providers</h1>
-<% if @providers.present? %>
+<% unless @providers.to_a.empty? %>
 <table class="table">
   <thead>
     <tr>
