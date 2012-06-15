@@ -8,6 +8,7 @@ gem 'kaminari'
 gem 'jquery-rails'
 gem 'mechanize'
 gem 'hippo'
+gem 'whenever', :require => false
 
 group :development, :test do
   gem 'capistrano'
