@@ -12,6 +12,7 @@ gem 'whenever', :require => false
 
 group :development, :test do
   gem 'capistrano'
+  gem 'rvm-capistrano'
   gem 'pry-rails'
 end
 
