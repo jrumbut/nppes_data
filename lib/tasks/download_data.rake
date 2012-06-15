@@ -22,4 +22,10 @@ desc "Download and Process."
 task :download_and_process => [:environment, :download, :unzip] do
   file = Dir.glob("#{File.dirname(ZIP_FILE_PATH)}/*.csv").reject{|name| name =~ /Header/}.first
   Rake::Task['populate_nppes'].invoke(file)
+  Rake::Task['clear_temp_files'].invoke
+end
+
+desc 'Clear temporarily downloaded files.'
+task :clear_temp_files do
+  FileUtils.rm_rf(File.dirname(ZIP_FILE_PATH))
 end
