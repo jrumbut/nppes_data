@@ -10,7 +10,7 @@ class ProvidersController < ApplicationController
   end
 
   def index
-    if valid_search_fields
+    if valid_search?
       @providers = Provider.first_name(params[:first_name]).
                             last_name(params[:last_name]).
                             organization(params[:organization]).
@@ -21,10 +21,8 @@ class ProvidersController < ApplicationController
                             org_city(params[:org_city]).
                             org_state(params[:org_state]).
                             org_postal_code(params[:org_postal_code]).
-                            provider_telephone( sanitize_phone(params[:provider_telephone]) ).
-                            practice_telephone( sanitize_phone(params[:practice_telephone]) ).
-                            official_telephone( sanitize_phone(params[:official_telephone]) ).
-                            limit(50)
+                            phone(sanitize_phone(params[:phone])).
+                            limit(200)
     else
       flash[:alert] = 'You must search using at least one of the following indexed fields (NPI, Org Name, Phone, Last Name).'
     end
@@ -34,7 +32,7 @@ class ProvidersController < ApplicationController
     p.nil? ? nil : p.gsub(/(\D+)/,'')
   end
 
-  def valid_search_fields
-    params.any? { |key, value| [:npi, :organization, :provider_telephone, :practice_telephone, :official_telephone, :last_name].include?(key.to_sym) }
+  def valid_search?
+    params.any? { |key, value| [:npi, :organization, :org_state, :state, :phone, :last_name].include?(key.to_sym) }
   end
 end

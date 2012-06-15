@@ -16,6 +16,7 @@ class Provider < ActiveRecord::Base
   scope :practice_telephone, lambda {|param| param.blank? ? scoped : where("provider_business_practice_location_address_telephone_number = ?", param) }
   scope :official_telephone, lambda {|param| param.blank? ? scoped : where("authorized_official_telephone_number = ?", param) }
 
+  scope :phone,              lambda {|param| param.blank? ? scoped : where("(provider_business_mailing_address_telephone_number = ? OR provider_business_practice_location_address_telephone_number = ? OR authorized_official_telephone_number = ?)", param, param, param) }
 
   def self.wildcard_search(field, value)
     if value.blank?
