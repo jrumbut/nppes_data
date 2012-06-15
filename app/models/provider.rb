@@ -16,30 +16,34 @@ class Provider < ActiveRecord::Base
   scope :practice_telephone, lambda {|param| param.blank? ? scoped : where("provider_business_practice_location_address_telephone_number = ?", param) }
   scope :official_telephone, lambda {|param| param.blank? ? scoped : where("authorized_official_telephone_number = ?", param) }
 
-  def self.first_name(param)
-    if param.blank?
+
+  def self.wildcard_search(field, value)
+    if value.blank?
       scoped
-    elsif param =~ /\*/
-      where("provider_first_name LIKE ?", param.gsub("*", "%"))
+    elsif value =~ /\*/
+      where("#{field} LIKE ?", value.gsub("*", "%"))
     else
-      where("provider_first_name = ?", param)
+      where("#{field} = ?", value)
     end
+  end
+
+  def self.first_name(param)
+    wildcard_search('provider_first_name', param)
   end
 
   def self.last_name(param)
-    if param.blank?
-      scoped
-    elsif param =~ /\*/
-      where("provider_last_name LIKE ?", param.gsub("*", "%"))
-    else
-      where("provider_last_name = ?", param)
-    end
+    wildcard_search('provider_last_name', param)
   end
 
+  def self.organization(param)
+    wildcard_search('provider_organization_name', param)
+  end
 
   def name
     if self.provider_last_name.present? && self.provider_first_name.present?
       (self.provider_last_name.to_s + ", " + self.provider_first_name.to_s).titleize
+    elsif self.provider_organization_name.present?
+      self.provider_organization_name
     else
       "Not Provided"
     end

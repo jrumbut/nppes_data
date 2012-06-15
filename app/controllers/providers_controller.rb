@@ -13,6 +13,7 @@ class ProvidersController < ApplicationController
     if valid_search_fields
       @providers = Provider.first_name(params[:first_name]).
                             last_name(params[:last_name]).
+                            organization(params[:organization]).
                             with_npi(params[:npi]).
                             city(params[:city]).
                             state(params[:state]).
