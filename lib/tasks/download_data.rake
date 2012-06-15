@@ -20,6 +20,6 @@ end
 
 desc "Download and Process."
 task :download_and_process => [:environment, :download, :unzip] do
-  file = Dir.glob("#{File.dirname(ZIP_FILE_PATH)}*.csv").reject{|name| name =~ /Header/}.first
+  file = Dir.glob("#{File.dirname(ZIP_FILE_PATH)}/*.csv").reject{|name| name =~ /Header/}.first
   Rake::Task['populate_nppes'].invoke(file)
 end
