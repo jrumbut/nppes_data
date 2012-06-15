@@ -4,7 +4,7 @@ require 'fileutils'
 ZIP_FILE_PATH = 'tmp/download_data/nppes_data.zip'
 
 desc "Download latest NPPES Data File"
-task :download => :environment do
+task :download do
 
   agent = Mechanize.new
   file  = agent.get('http://nppes.viva-it.com/NPI_Files.html').link_with(:href => /\.zip\z/).click
@@ -14,7 +14,7 @@ task :download => :environment do
 end
 
 desc "Unzip the latest NPPES Data File"
-task :unzip => :environment do
+task :unzip do
   `unzip #{ZIP_FILE_PATH} -d #{File.dirname(ZIP_FILE_PATH)}`
 end
 
