@@ -63,7 +63,7 @@
   </p>
 </fieldset>
 <fieldset>
-  <legend>Provider Business Mailing Address</legend>
+  <legend>Taxonomies</legend>
 
   <table class="table">
     <thead>
@@ -82,6 +82,27 @@
     </tbody>
   </table>
 </fieldset>
+<fieldset>
+  <legend>Provider Numbers</legend>
 
+  <table class="table">
+    <thead>
+      <th>Type</th>
+      <th>State</th>
+      <th>Identifier</th>
+      <th>Issuer</th>
+    </thead>
+    <tbody>
+      <% @provider.provider_identifiers.each do |ident| %>
+        <tr>
+          <td><%= ident.type %></td>
+          <td><%= ident.state %></td>
+          <td><%= ident.identifier %></td>
+          <td><%= ident.additional_info %></td>
+        </tr>
+      <% end -%>
+    </tbody>
+  </table>
+</fieldset>
 
 <%= link_to 'Back', providers_path %>
