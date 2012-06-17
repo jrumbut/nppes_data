@@ -47,6 +47,22 @@
   </p>
 </fieldset>
 <fieldset>
+  <legend>Provider Business Practice Location Address</legend>
+  <p>
+    <b>Address:</b>
+    <div><%= @provider.provider_first_line_business_practice_location_address %><br/>
+    <%= @provider.provider_business_practice_location_address_city_name %>, <%= @provider.provider_business_practice_location_address_city_name %>  <%= @provider.provider_business_practice_location_address_postal_code %></div>
+  </p>
+  <p>
+    <b>Phone Number:</b>
+    <%= @provider.provider_business_practice_location_address_telephone_number %>
+  </p>
+  <p>
+    <b>Fax Number:</b>
+    <%= @provider.provider_business_practice_location_address_fax_number %>
+  </p>
+</fieldset>
+<fieldset>
   <legend>Provider Business Mailing Address</legend>
   <p>
     <b>Address:</b>
