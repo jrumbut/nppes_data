@@ -84,7 +84,7 @@ def process_row(row)
     provider.provider_identifiers.where(
       identifier: row[:"provider_license_number_#{num}"],
       type_code:  'LC',
-      state:      row[:":provider_license_number_state_code_#{num}"]).first_or_create
+      state:      row[:"provider_license_number_state_code_#{num}"]).first_or_create
   end
 
   1.upto(15).each do |num|
@@ -102,8 +102,8 @@ def process_row(row)
 
     provider.provider_identifiers.where(
       identifier:       row[:"other_provider_identifier_#{num}"],
-      type_code:        row[:":other_provider_identifier_type_code_#{num}"],
-      state:            row[:":other_provider_identifier_state_#{num}"],
-      additional_info:  row[:":other_provider_identifier_issuer_#{num}"]).first_or_create
+      type_code:        row[:"other_provider_identifier_type_code_#{num}"],
+      state:            row[:"other_provider_identifier_state_#{num}"],
+      additional_info:  row[:"other_provider_identifier_issuer_#{num}"]).first_or_create
   end
 end
