@@ -18,9 +18,6 @@ class ProvidersController < ApplicationController
                             city(params[:city]).
                             state(params[:state]).
                             postal_code(params[:postal_code]).
-                            org_city(params[:org_city]).
-                            org_state(params[:org_state]).
-                            org_postal_code(params[:org_postal_code]).
                             phone(sanitize_phone(params[:phone])).
                             limit(200)
     else
@@ -33,6 +30,6 @@ class ProvidersController < ApplicationController
   end
 
   def valid_search?
-    params.any? { |key, value| [:npi, :organization, :org_state, :state, :phone, :last_name].include?(key.to_sym) }
+    params.any? { |key, value| [:npi, :organization, :state, :phone, :last_name].include?(key.to_sym) }
   end
 end

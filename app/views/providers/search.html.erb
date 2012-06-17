@@ -1,4 +1,50 @@
-<%= render 'npi_search' %>
-<%= render 'organization_search' %>
-<%= render 'individual_search' %>
-<%= render 'phone_search' %>
+<div class="container" id='individual_search' style="display:false;">
+  <h2>Search</h2>
+  <%= form_tag(results_providers_path, :method => 'post' ) do %>
+    <%= hidden_field_tag :search, :true %>
+    <div class="row">
+      <div class="span3">
+        <%= label_tag :npi, 'NPI' %>
+        <%= text_field_tag :npi, params[:npi], :class => 'search-field' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span3">
+        <%= label_tag :organization, 'Organization Name' %>
+        <%= text_field_tag :organization, params[:organization], :class => 'search-field' %>
+      </div>
+      <div class="span3">
+        <%= label_tag :last_name %>
+        <%= text_field_tag :last_name, params[:last_name], :class => 'search-field' %>
+      </div>
+      <div class="span3">
+        <%= label_tag :first_name %>
+        <%= text_field_tag :first_name, params[:first_name], :class => 'search-field' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span3">
+        <%= label_tag :city %>
+        <%= text_field_tag :city, params[:city], :class => 'search-field' %>
+      </div>
+      <div class="span3">
+        <%= label_tag :state %>
+        <%= text_field_tag :state, params[:state], :class => 'search-field' %>
+      </div>
+      <div class="span3">
+        <%= label_tag :postal_code %>
+        <%= text_field_tag :postal_code, params[:postal_code], :class => 'search-field' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span3">
+        <%= label_tag :phone %>
+        <%= text_field_tag :phone, params[:phone], :class => 'search-field' %>
+      </div>
+    </div>
+    <div>
+      <%= submit_tag "Search", :class => 'btn primary', :name => nil %>
+    </div>
+  </div>
+  <% end %>
+</div>

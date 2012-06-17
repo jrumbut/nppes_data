@@ -2,21 +2,25 @@ class Provider < ActiveRecord::Base
   has_many :provider_identifiers
   has_many :provider_taxonomies
 
-  scope :with_npi,           lambda {|param| param.blank? ? scoped : where("npi = ?", param) }
+  scope :with_npi,              lambda {|param| param.blank? ? scoped : where("npi = ?", param) }
 
-  scope :city,               lambda {|param| param.blank? ? scoped : where("provider_business_mailing_address_city_name = ?", param) }
-  scope :state,              lambda {|param| param.blank? ? scoped : where("provider_mailing_address_state_name = ?", param) }
-  scope :postal_code,        lambda {|param| param.blank? ? scoped : where("provider_business_mailing_address_postal_code = ?", param) }
+  scope :city,                  lambda {|param| param.blank? ? scoped : where("(provider_business_mailing_address_city_name = ? OR provider_business_practice_location_address_city_name = ?)", param, param) }
+  scope :state,                 lambda {|param| param.blank? ? scoped : where("(provider_mailing_address_state_name = ? OR provider_business_practice_location_address_state_name = ?)", param, param) }
+  scope :postal_code,           lambda {|param| param.blank? ? scoped : where("(provider_business_mailing_address_postal_code = ? OR provider_business_practice_location_address_postal_code = ?)", param, param) }
 
-  scope :org_state,          lambda {|param| param.blank? ? scoped : where("provider_business_practice_location_address_state_name = ?", param) }
-  scope :org_city,           lambda {|param| param.blank? ? scoped : where("provider_business_practice_location_address_city_name = ?", param) }
-  scope :org_postal_code,    lambda {|param| param.blank? ? scoped : where("provider_business_practice_location_address_postal_code = ?", param) }
+  scope :mailing_city,          lambda {|param| param.blank? ? scoped : where("provider_business_mailing_address_city_name = ?", param) }
+  scope :mailing_state,         lambda {|param| param.blank? ? scoped : where("provider_mailing_address_state_name = ?", param) }
+  scope :mailing_postal_code,   lambda {|param| param.blank? ? scoped : where("provider_business_mailing_address_postal_code = ?", param) }
 
-  scope :provider_telephone, lambda {|param| param.blank? ? scoped : where("provider_business_mailing_address_telephone_number = ?", param) }
-  scope :practice_telephone, lambda {|param| param.blank? ? scoped : where("provider_business_practice_location_address_telephone_number = ?", param) }
-  scope :official_telephone, lambda {|param| param.blank? ? scoped : where("authorized_official_telephone_number = ?", param) }
+  scope :practice_city,         lambda {|param| param.blank? ? scoped : where("provider_business_practice_location_address_city_name = ?", param) }
+  scope :practice_state,        lambda {|param| param.blank? ? scoped : where("provider_business_practice_location_address_state_name = ?", param) }
+  scope :practice_postal_code,  lambda {|param| param.blank? ? scoped : where("provider_business_practice_location_address_postal_code = ?", param) }
 
-  scope :phone,              lambda {|param| param.blank? ? scoped : where("(provider_business_mailing_address_telephone_number = ? OR provider_business_practice_location_address_telephone_number = ? OR authorized_official_telephone_number = ?)", param, param, param) }
+  scope :provider_telephone,    lambda {|param| param.blank? ? scoped : where("provider_business_mailing_address_telephone_number = ?", param) }
+  scope :practice_telephone,    lambda {|param| param.blank? ? scoped : where("provider_business_practice_location_address_telephone_number = ?", param) }
+  scope :official_telephone,    lambda {|param| param.blank? ? scoped : where("authorized_official_telephone_number = ?", param) }
+
+  scope :phone,                 lambda {|param| param.blank? ? scoped : where("(provider_business_mailing_address_telephone_number = ? OR provider_business_practice_location_address_telephone_number = ? OR authorized_official_telephone_number = ?)", param, param, param) }
 
   def self.wildcard_search(field, value)
     if value.blank?
