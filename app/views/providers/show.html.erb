@@ -6,14 +6,23 @@
     <b>Name:</b>
     <%= @provider.name %>
   </p>
-  <p>
-    <b>Gender:</b>
-    <%= @provider.provider_gender_code %>
-  </p>
-  <p>
-    <b>Sole Proprieter?:</b>
-    <%= @provider.is_sole_proprietor %>
-  </p>
+  <% if @provider.other_name %>
+    <p>
+      <b>Other Name:</b>
+      <%= @provider.other_name %>
+    </p>
+  <% end %>
+  <% if @provider.entity_type_code == '1' %>
+    <p>
+      <b>Gender:</b>
+      <%= @provider.provider_gender_code %>
+    </p>
+  <% else %>
+    <p>
+      <b>Sole Proprieter?:</b>
+      <%= @provider.is_sole_proprietor %>
+    </p>
+  <% end %>
 </fieldset>
 <fieldset>
   <legend>NPI Information</legend>

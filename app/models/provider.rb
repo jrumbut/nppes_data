@@ -45,12 +45,30 @@ class Provider < ActiveRecord::Base
   end
 
   def name
-    if self.provider_last_name.present? && self.provider_first_name.present?
-      (self.provider_last_name.to_s + ", " + self.provider_first_name.to_s).titleize
-    elsif self.provider_organization_name.present?
-      self.provider_organization_name
+    if entity_type_code == '1'
+      [provider_first_name, provider_middle_name, provider_last_name, provider_name_suffix_text, provider_credential_text].join(' ')
     else
-      "Not Provided"
+      self.provider_organization_name
+    end
+  end
+
+  def other_name
+    ret = if entity_type_code == '1'
+            [name_type_code_xref(provider_other_last_name_type_code), provider_other_first_name, provider_other_middle_name, provider_other_last_name, provider_other_name_suffix_text, provider_other_credential_text].join(' ')
+          else
+            name_type_code_xref(provider_other_organization_name_type_code) + ' ' + self.provider_other_organization_name
+          end
+
+    ret.to_s.strip.blank? ? nil : ret
+  end
+
+  def name_type_code_xref(code)
+    case code
+    when '1' then 'Former:'
+    when '2' then 'Professional:'
+    when '3' then 'D/B/A:'
+    when '4' then 'Former:'
+    when '5' then 'Other:'
     end
   end
 end
