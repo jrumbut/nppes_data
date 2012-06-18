@@ -1,29 +1,31 @@
-<h1>Listing providers</h1>
-<% unless @providers.to_a.empty? %>
-<table class="table">
-  <thead>
-    <tr>
-      <th>NPI</th>
-      <th>Provider Name</th>
-      <th>Address</th>
-      <th>City</th>
-      <th>State</th>
-      <th>Postal Code</th>
-      <th>Show</th>
-    </tr>
-  </thead>
+<% if @providers.to_a.length > 0 %>
+  <h1>Listing providers</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>NPI</th>
+        <th>Provider Name</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Postal Code</th>
+        <th>Show</th>
+      </tr>
+    </thead>
 
-<% @providers.each do |provider| %>
-  <tr>
-    <td><%= provider.npi %></td>
-    <td><%= provider.name %></td>
-    <td><%= provider.provider_first_line_business_address %></td>
-    <td><%= provider.provider_business_mailing_address_city_name %></td>
-    <td><%= provider.provider_mailing_address_state_name %></td>
-    <td><%= provider.provider_business_mailing_address_postal_code %></td>
-    <td><%= link_to 'Show', provider %></td>
-  </tr>
-<% end %>
-</table>
-<br/>
+  <% @providers.each do |provider| %>
+    <tr>
+      <td><%= provider.npi %></td>
+      <td><%= provider.name %></td>
+      <td><%= provider.provider_first_line_business_address %></td>
+      <td><%= provider.provider_business_mailing_address_city_name %></td>
+      <td><%= provider.provider_mailing_address_state_name %></td>
+      <td><%= provider.provider_business_mailing_address_postal_code %></td>
+      <td><%= link_to 'Show', provider %></td>
+    </tr>
+  <% end %>
+  </table>
+  <br/>
+<% else %>
+  <h1>No providers found using the criteria specified!!</h1>
 <% end -%>
