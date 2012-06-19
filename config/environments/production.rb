@@ -64,4 +64,22 @@ NppesData::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+
+  # Set the logging destination(s)
+  config.log_to = %w[file]
+
+  config.middleware.use ExceptionNotifier,
+    :sender_address       => 'nppes_data@promedicalinc.com',
+    :exception_recipients  => 'mail.admin@promedicalinc.com'
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address              => "mail.promedicalinc.com",
+    :port                 => 25,
+    :domain               => "promedicalinc.com",
+    :enable_starttls_auto => true  }
+
+
+  # Show the logging configuration on STDOUT
+  config.show_log_configuration = false
 end

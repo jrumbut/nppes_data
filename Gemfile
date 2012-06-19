@@ -10,6 +10,8 @@ gem 'mechanize'
 gem 'hippo'
 gem 'whenever', :require => false
 gem 'therubyracer', '~> 0.9.8'
+gem 'exception_notification'
+gem 'logging-rails', :require => 'logging/rails'
 
 group :development, :test do
   gem 'capistrano'
