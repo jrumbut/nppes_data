@@ -69,6 +69,7 @@ class Provider < ActiveRecord::Base
     when '3' then 'D/B/A:'
     when '4' then 'Former:'
     when '5' then 'Other:'
+    else ''
     end
   end
 end
